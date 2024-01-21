@@ -1,14 +1,14 @@
 # Molong:基于 ASP\.NET Core+Vue 的博客系统
 
-### 介绍
+## 系统介绍
 
 使用 ASP\.NET Core + Vue 框架来实现一个功能齐全的博客网站，涵盖博客列表展示、博客详情查看、发表博客、评论功能、博客分类、标签管理、博客搜索以及博客点赞和收藏等功能。
 
-### 更新日志
+## 更新日志
 
 - [更新日志](./CHANGELOG.md)
 
-### 功能清单
+## 功能清单
 
 1. **分类管理**：为了方便用户浏览和检索文章内容，文章可以按照不同的分类进行归类。例如，可以按照技术、生活、旅行等分类来组织文章。用户可以选择感兴趣的分类，查看该分类下的相关文章列表。
 2. **发表文章**：注册用户可以发表自己的文章，与其他用户分享自己的观点和经验。发表文章需要填写标题、内容和标签等信息，并将这些信息保存到数据库中。发表成功后，文章将在文章列表中显示，并可以被其他用户阅读和评论。
@@ -23,16 +23,18 @@
 
 - 微信公众号：南荣相如
 - 邮箱：1282301776@qq.com
+- 主页：https://home.nanrong.store/
 - Github: https://github.com/zcqiand
 
 ## 微信公众号
 
 如果大家想要实时关注我更新的文章以及分享的干货的话，可以关注我的公众号。
 
-![](https://raw.githubusercontent.com/zcqiand/nanrong/main/assets/weixin.jpg)
+![](https://home.nanrong.store/assets/weixin.jpg)
 
 ## 捐赠支持
 
-项目的发展离不开你的支持，如果觉得我们的内容对于你有所帮助，请作者喝杯咖啡吧！ 后续会继续完善更新！一起加油！
+如果觉得我们的内容对于你有所帮助，请作者喝杯咖啡吧！ 后续会继续完善更新！一起加油！
 
-![](https://raw.githubusercontent.com/zcqiand/nanrong/main/assets/zhifu.png)
+![](https://home.nanrong.store/assets/zhifu.png)
+
