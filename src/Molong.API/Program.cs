@@ -1,6 +1,8 @@
+using Microsoft.IdentityModel.Tokens;
 using Molong.API.Mappers;
 using Molong.HostApp.Services;
 using Newtonsoft.Json;
+using OpenIddict.Validation.AspNetCore;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -53,6 +55,28 @@ services.ConfigureSwaggerGen(options =>
 });
 services.AddSwaggerGen();
 
+services.AddOpenIddict()
+    .AddValidation(options =>
+    {
+        options.SetIssuer(configuration["OpenIddict:IssuerUrl"]!);
+
+        options.AddEncryptionKey(new SymmetricSecurityKey(
+            Convert.FromBase64String(configuration["OpenIddict:SecurityKey"]!)));
+
+        options.UseSystemNetHttp();
+
+        options.UseAspNetCore();
+    });
+
+services.AddAuthentication(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
+services.AddAuthorization(options =>
+{
+    options.AddPolicy("ApiScope", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -72,6 +96,8 @@ app.MapGet("/test", (IConfiguration configuration) =>
     return $"{Assembly.GetExecutingAssembly().FullName};当前时间：{DateTime.Now}";
 });
 
-app.MapControllers();
+app.MapControllers()
+    .RequireAuthorization("ApiScope");
+
 
 app.Run();
