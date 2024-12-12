@@ -31,7 +31,8 @@ services.AddCors(options =>
 services.AddDbContext<MolongDbContext>(options =>
 {
     options.EnableSensitiveDataLogging(true);
-    options.UseSqlServer(configuration.GetConnectionString("MolongDbConnection")!, b => b.MigrationsAssembly("Molong.API"));
+    //options.UseSqlServer(configuration.GetConnectionString("MolongDbConnection")!, b => b.MigrationsAssembly("Molong.API"));
+    options.UseNpgsql(configuration.GetConnectionString("MolongDbConnection")!, b => b.MigrationsAssembly("Molong.API"));
 });
 
 services.Scan(

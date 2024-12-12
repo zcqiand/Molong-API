@@ -90,7 +90,7 @@ public class ArticleCollectionService : ServiceBase
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    public async Task<PagingOut<ArticleCollectionQueryOutDto>> Query(ArticleCollectionQueryInDto input)
+    public async Task<PagingOutBase<ArticleCollectionQueryOutDto>> Query(ArticleCollectionQueryInDto input)
     {
         var query = from a in _dbContext.ArticleCollections.AsNoTracking()
                     select a;
@@ -108,7 +108,7 @@ public class ArticleCollectionService : ServiceBase
 
         var itemDtos = Mapper.Map<IList<ArticleCollectionQueryOutDto>>(items);
 
-        return new PagingOut<ArticleCollectionQueryOutDto>(total, itemDtos);
+        return new PagingOutBase<ArticleCollectionQueryOutDto>(total, itemDtos);
     }
 
     /// <summary>

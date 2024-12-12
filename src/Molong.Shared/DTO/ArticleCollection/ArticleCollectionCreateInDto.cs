@@ -3,7 +3,7 @@
 /// <summary>
 /// 文章收藏
 /// </summary>
-public class ArticleCollectionCreateInDto : DtoBase
+public class ArticleCollectionCreateInDto : CreateInBase
 {
     /// <summary>
     /// 标识

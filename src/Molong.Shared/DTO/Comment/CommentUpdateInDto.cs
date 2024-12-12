@@ -3,7 +3,7 @@
 /// <summary>
 /// 评论
 /// </summary>
-public class CommentUpdateInDto : DtoBase
+public class CommentUpdateInDto : UpdateInBase
 {
     /// <summary>
     /// 标识

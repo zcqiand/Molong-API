@@ -76,7 +76,7 @@ public class ArticleTagController : AppControllerBase
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpGet]
-    public async Task<ApiResult<PagingOut<ArticleTagQueryOutDto>>> Query([FromQuery] ArticleTagQueryInDto input)
+    public async Task<ApiResult<PagingOutBase<ArticleTagQueryOutDto>>> Query([FromQuery] ArticleTagQueryInDto input)
     {
         var result = await _service.Query(input);
         return Success(result);

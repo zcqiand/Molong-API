@@ -3,7 +3,7 @@
 /// <summary>
 /// 标签
 /// </summary>
-public class TagUpdateInDto : DtoBase
+public class TagUpdateInDto : UpdateInBase
 {
     /// <summary>
     /// 标识

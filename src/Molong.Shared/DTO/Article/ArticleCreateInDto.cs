@@ -3,7 +3,7 @@
 /// <summary>
 /// 文章
 /// </summary>
-public class ArticleCreateInDto : DtoBase
+public class ArticleCreateInDto : CreateInBase
 {
     /// <summary>
     /// 标识

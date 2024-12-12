@@ -3,7 +3,7 @@
 /// <summary>
 /// 文章标签
 /// </summary>
-public class ArticleTagGetOutDto : DtoBase
+public class ArticleTagGetOutDto : GetOutBase
 {
     /// <summary>
     /// 标识

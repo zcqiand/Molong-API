@@ -3,7 +3,7 @@
 /// <summary>
 /// 分类
 /// </summary>
-public class CategoryCreateInDto : DtoBase
+public class CategoryCreateInDto : CreateInBase
 {
     /// <summary>
     /// 标识

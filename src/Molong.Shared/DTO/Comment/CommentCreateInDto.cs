@@ -3,7 +3,7 @@
 /// <summary>
 /// 评论
 /// </summary>
-public class CommentCreateInDto : DtoBase
+public class CommentCreateInDto : CreateInBase
 {
     /// <summary>
     /// 标识

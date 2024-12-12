@@ -90,7 +90,7 @@ public class ArticleTagService : ServiceBase
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    public async Task<PagingOut<ArticleTagQueryOutDto>> Query(ArticleTagQueryInDto input)
+    public async Task<PagingOutBase<ArticleTagQueryOutDto>> Query(ArticleTagQueryInDto input)
     {
         var query = from a in _dbContext.ArticleTags.AsNoTracking()
                     select a;
@@ -108,7 +108,7 @@ public class ArticleTagService : ServiceBase
 
         var itemDtos = Mapper.Map<IList<ArticleTagQueryOutDto>>(items);
 
-        return new PagingOut<ArticleTagQueryOutDto>(total, itemDtos);
+        return new PagingOutBase<ArticleTagQueryOutDto>(total, itemDtos);
     }
 
     /// <summary>

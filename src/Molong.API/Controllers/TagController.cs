@@ -76,7 +76,7 @@ public class TagController : AppControllerBase
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpGet]
-    public async Task<ApiResult<PagingOut<TagQueryOutDto>>> Query([FromQuery] TagQueryInDto input)
+    public async Task<ApiResult<PagingOutBase<TagQueryOutDto>>> Query([FromQuery] TagQueryInDto input)
     {
         var result = await _service.Query(input);
         return Success(result);

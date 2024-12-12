@@ -90,7 +90,7 @@ public class CategoryService : ServiceBase
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    public async Task<PagingOut<CategoryQueryOutDto>> Query(CategoryQueryInDto input)
+    public async Task<PagingOutBase<CategoryQueryOutDto>> Query(CategoryQueryInDto input)
     {
         var query = from a in _dbContext.Categories.AsNoTracking()
                     select a;
@@ -108,7 +108,7 @@ public class CategoryService : ServiceBase
 
         var itemDtos = Mapper.Map<IList<CategoryQueryOutDto>>(items);
 
-        return new PagingOut<CategoryQueryOutDto>(total, itemDtos);
+        return new PagingOutBase<CategoryQueryOutDto>(total, itemDtos);
     }
 
     /// <summary>

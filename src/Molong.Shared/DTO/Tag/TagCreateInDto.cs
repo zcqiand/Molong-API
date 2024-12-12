@@ -3,7 +3,7 @@
 /// <summary>
 /// 标签
 /// </summary>
-public class TagCreateInDto : DtoBase
+public class TagCreateInDto : CreateInBase
 {
     /// <summary>
     /// 标识

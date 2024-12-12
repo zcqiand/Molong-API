@@ -2,122 +2,140 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Molong.Infrastructure;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace Molong.API.Migrations
 {
     [DbContext(typeof(MolongDbContext))]
-    [Migration("20240103113009_RemoveUser")]
-    partial class RemoveUser
+    [Migration("20241212130130_CreateInit")]
+    partial class CreateInit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.14")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("ProductVersion", "8.0.11")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Molong.Domain.Model.Article", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasComment("标识");
 
                     b.Property<Guid>("CategoryId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid")
+                        .HasComment("分类标识");
 
                     b.Property<int>("Collections")
-                        .HasColumnType("int");
+                        .HasColumnType("integer")
+                        .HasComment("收藏数");
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
+                        .HasColumnType("text")
+                        .HasComment("内容");
 
                     b.Property<string>("CreateFullName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasComment("创建人");
 
                     b.Property<DateTimeOffset>("CreateTime")
-                        .HasColumnType("datetimeoffset")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("创建时间");
 
                     b.Property<Guid?>("CreateUserId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid")
+                        .HasComment("创建人标识");
 
                     b.Property<DateTimeOffset>("LastModifyTime")
-                        .HasColumnType("datetimeoffset")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("最后更新时间");
 
                     b.Property<int>("Likes")
-                        .HasColumnType("int");
+                        .HasColumnType("integer")
+                        .HasComment("点赞数");
 
                     b.Property<DateTime?>("PublishDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone")
+                        .HasComment("发布时间");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("character varying(200)")
+                        .HasComment("标题");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Article");
+                    b.ToTable("Article", t =>
+                        {
+                            t.HasComment("文章");
+                        });
                 });
 
             modelBuilder.Entity("Molong.Domain.Model.ArticleCollection", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasComment("标识");
 
                     b.Property<Guid>("ArticleId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid")
+                        .HasComment("文章标识");
 
                     b.Property<DateTimeOffset>("CreateTime")
-                        .HasColumnType("datetimeoffset")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("创建时间");
 
                     b.Property<DateTimeOffset>("LastModifyTime")
-                        .HasColumnType("datetimeoffset")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("最后更新时间");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid")
+                        .HasComment("用户标识");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ArticleCollection");
+                    b.ToTable("ArticleCollection", t =>
+                        {
+                            t.HasComment("文章收藏");
+                        });
                 });
 
             modelBuilder.Entity("Molong.Domain.Model.ArticleTag", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasComment("标识");
 
                     b.Property<Guid>("ArticleId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid")
+                        .HasComment("文章标识");
 
                     b.Property<DateTimeOffset>("CreateTime")
-                        .HasColumnType("datetimeoffset")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("创建时间");
 
                     b.Property<DateTimeOffset>("LastModifyTime")
-                        .HasColumnType("datetimeoffset")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("最后更新时间");
 
                     b.Property<Guid>("TagId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid")
+                        .HasComment("标签标识");
 
                     b.HasKey("Id");
 
@@ -125,96 +143,116 @@ namespace Molong.API.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("ArticleTag");
+                    b.ToTable("ArticleTag", t =>
+                        {
+                            t.HasComment("文章标签");
+                        });
                 });
 
             modelBuilder.Entity("Molong.Domain.Model.Category", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasComment("标识");
 
                     b.Property<DateTimeOffset>("CreateTime")
-                        .HasColumnType("datetimeoffset")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("创建时间");
 
                     b.Property<DateTimeOffset>("LastModifyTime")
-                        .HasColumnType("datetimeoffset")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("最后更新时间");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasComment("名称");
+
+                    b.Property<int>("SortNo")
+                        .HasColumnType("integer")
+                        .HasComment("排序号");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Category", t =>
+                        {
+                            t.HasComment("分类");
+                        });
                 });
 
             modelBuilder.Entity("Molong.Domain.Model.Comment", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasComment("标识");
 
                     b.Property<Guid>("ArticleId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("AuthorName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("uuid")
+                        .HasComment("文章标识");
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
+                        .HasColumnType("text")
+                        .HasComment("内容");
 
                     b.Property<string>("CreateFullName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasComment("创建人");
 
                     b.Property<DateTimeOffset>("CreateTime")
-                        .HasColumnType("datetimeoffset")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("创建时间");
 
                     b.Property<Guid?>("CreateUserId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid")
+                        .HasComment("创建人标识");
 
                     b.Property<DateTimeOffset>("LastModifyTime")
-                        .HasColumnType("datetimeoffset")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("最后更新时间");
 
                     b.Property<DateTime?>("PublishDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone")
+                        .HasComment("发布时间");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ArticleId");
 
-                    b.ToTable("Comment");
+                    b.ToTable("Comment", t =>
+                        {
+                            t.HasComment("评论");
+                        });
                 });
 
             modelBuilder.Entity("Molong.Domain.Model.Tag", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasComment("标识");
 
                     b.Property<DateTimeOffset>("CreateTime")
-                        .HasColumnType("datetimeoffset")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("创建时间");
 
                     b.Property<DateTimeOffset>("LastModifyTime")
-                        .HasColumnType("datetimeoffset")
+                        .HasColumnType("timestamp with time zone")
                         .HasComment("最后更新时间");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasComment("名称");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tag");
+                    b.ToTable("Tag", t =>
+                        {
+                            t.HasComment("标签");
+                        });
                 });
 
             modelBuilder.Entity("Molong.Domain.Model.Article", b =>

@@ -90,7 +90,7 @@ public class CommentService : ServiceBase
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    public async Task<PagingOut<CommentQueryOutDto>> Query(CommentQueryInDto input)
+    public async Task<PagingOutBase<CommentQueryOutDto>> Query(CommentQueryInDto input)
     {
         var query = from a in _dbContext.Comments.Include(x=>x.Article).AsNoTracking()
                     select a;
@@ -108,7 +108,7 @@ public class CommentService : ServiceBase
 
         var itemDtos = Mapper.Map<IList<CommentQueryOutDto>>(items);
 
-        return new PagingOut<CommentQueryOutDto>(total, itemDtos);
+        return new PagingOutBase<CommentQueryOutDto>(total, itemDtos);
     }
 
     /// <summary>

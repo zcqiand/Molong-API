@@ -3,7 +3,7 @@
 /// <summary>
 /// 评论
 /// </summary>
-public class CommentGetOutDto : DtoBase
+public class CommentGetOutDto : GetOutBase
 {
     /// <summary>
     /// 标识

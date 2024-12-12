@@ -3,7 +3,7 @@
 /// <summary>
 /// 分类
 /// </summary>
-public class CategoryUpdateInDto : DtoBase
+public class CategoryUpdateInDto : UpdateInBase
 {
     /// <summary>
     /// 标识

@@ -76,7 +76,7 @@ public class ArticleController : AppControllerBase
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpGet]
-    public async Task<ApiResult<PagingOut<ArticleQueryOutDto>>> Query([FromQuery] ArticleQueryInDto input)
+    public async Task<ApiResult<PagingOutBase<ArticleQueryOutDto>>> Query([FromQuery] ArticleQueryInDto input)
     {
         var result = await _service.Query(input);
         return Success(result);

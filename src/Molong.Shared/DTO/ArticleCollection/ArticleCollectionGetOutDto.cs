@@ -3,7 +3,7 @@
 /// <summary>
 /// 文章收藏
 /// </summary>
-public class ArticleCollectionGetOutDto : DtoBase
+public class ArticleCollectionGetOutDto : GetOutBase
 {
     /// <summary>
     /// 标识

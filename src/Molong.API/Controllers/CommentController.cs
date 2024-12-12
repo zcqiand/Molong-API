@@ -76,7 +76,7 @@ public class CommentController : AppControllerBase
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpGet]
-    public async Task<ApiResult<PagingOut<CommentQueryOutDto>>> Query([FromQuery] CommentQueryInDto input)
+    public async Task<ApiResult<PagingOutBase<CommentQueryOutDto>>> Query([FromQuery] CommentQueryInDto input)
     {
         var result = await _service.Query(input);
         return Success(result);
